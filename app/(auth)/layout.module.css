@@ -1,0 +1,93 @@
+.registerPage {
+  position: relative;
+  min-height: 100vh;
+  padding: 25px 0px 0px 0px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 121%;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.boldText {
+  color: var(--color-primary);
+}
+
+.imageWrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 97px;
+  margin-left: -10px;
+}
+
+.logo {
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .registerPage {
+    padding: 28px 0px 0px 0px;
+  }
+
+  .logo {
+    width: 172px;
+    height: 44px;
+    margin-bottom: 64px;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 54px;
+    line-height: 111%;
+    margin-bottom: 54px;
+  }
+
+  .imageWrapper {
+    width: 179px;
+    height: 175px;
+    margin-left: -20px;
+  }
+
+  .pillImage {
+    width: 179px;
+    height: 175px;
+  }
+
+  .decoration {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .logo {
+    margin-bottom: 122px;
+  }
+
+  .contentWrapper {
+    flex-direction: row;
+    gap: 54px;
+  }
+
+  .title {
+    flex-basis: 50%;
+    flex-shrink: 0;
+    margin-bottom: 0px;
+  }
+}
