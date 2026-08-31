@@ -1,5 +1,6 @@
 import { Icon } from '@/app/components/Icon/Icon';
 import css from './Input.module.css';
+import clsx from 'clsx';
 
 import type { InputHTMLAttributes } from "react";
 
@@ -7,6 +8,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   error?: string;
   valid?: boolean;
+  className?: string;
 };
 
 export const Input = ({ label, error, valid, id, ...props }: InputProps) => {
@@ -25,7 +27,7 @@ export const Input = ({ label, error, valid, id, ...props }: InputProps) => {
       {valid && <Icon name='icon-check'/>}
       </div>
 
-      {error && <p className={css.error}>{error}</p>}
+      {/* {error && <p className={css.error}>{error}</p>} */}
     </div>
   );
 };

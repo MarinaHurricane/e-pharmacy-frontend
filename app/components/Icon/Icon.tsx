@@ -12,8 +12,8 @@ export function Icon({
   className,
 }: IconProps) {
   return (
-    <svg className={className} width={width} height={height}>
-      <use href={`/icons/sprite.svg#icon-${name}`} />
+    <svg className={className} width={width} height={height} aria-hidden="true">
+      <use href={`/icons/sprite.svg#${name}`} />
     </svg>
   );
 }
