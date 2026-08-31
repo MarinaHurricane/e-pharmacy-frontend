@@ -25,7 +25,12 @@
   flex-direction: column;
 }
 
-.input {
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.field {
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 60px;
   padding: 12px;
@@ -36,9 +41,105 @@
   position: relative;
 }
 
-.input::placeholder {
+.field::placeholder {
   color: var(--color-text-light);
 }
+
+.errorField {
+  border: 1px solid #ef2447;
+  border-radius: 30px;
+  padding: 12px 155px 12px 12px;
+  width: 100%;
+  height: 44px;
+}
+
+.check {
+  border: 1px solid #08aa83;
+  border-radius: 30px;
+  padding: 12px 155px 12px 12px;
+  width: 100%;
+  height: 44px;
+}
+
+.iconCheck {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  position: absolute;
+  top: 13px;
+  right: 16px;
+}
+
+.iconEye {
+  width: 18px;
+  height: 18px;
+}
+
+.iconPasswordCheck {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  position: absolute;
+  top: 13px;
+  right: 38px;
+}
+
+.passwordCorrect {
+  color: #08aa83;
+  margin-left: 12px;
+  font-size: 6px;
+}
+
+.button {
+  margin-bottom: 12px;
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 120%;
+  letter-spacing: -0.03em;
+  color: #ef2447;
+  margin-left: 12px;
+}
+
+.clearButton {
+  stroke: #ef2447;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-color: inherit;
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  outline: none;
+}
+
+.emailPassword {
+  position: relative;
+  width: 100%;
+  height: 44px;
+}
+
+.passwordVisibility {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: inherit;
+}
+
 
 @media screen and (min-width: 768px) {
   .form {
@@ -50,7 +151,7 @@
     max-width: 280px;
   }
 
-  .input {
+    .field {
     width: 323px;
     padding: 13px 18px;
   }
@@ -62,6 +163,14 @@
   .notice {
   text-align: left;
   margin-left: 40px;
+  }
+
+    .error {
+    font-size: 10px;
+  }
+
+  .emailPassword {
+    width: 323px;
   }
 }
 

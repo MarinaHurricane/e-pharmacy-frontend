@@ -50,7 +50,6 @@ export const RegisterForm = () => {
       router.push('/medicine');
     },
     onError: (error) => {
-      console.log(error);
       alert('Registration failed, please try again');
     },
   });
