@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { isAxiosError } from "axios";
-import { serverApi } from "@/app/lib/api/serverApi";
+import { serverApi } from "@/app/lib/api/server/serverApi";
 
 type Params = {
   path: string[];

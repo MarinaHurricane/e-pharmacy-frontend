@@ -1,4 +1,3 @@
-"use client";
 
 import axios, {
   AxiosError,
@@ -14,12 +13,12 @@ declare module "axios" {
   }
 }
 
-export const clientApi = axios.create({
+export const nextServer = axios.create({
   baseURL: "/api",
   withCredentials: true,
 });
 
-clientApi.interceptors.response.use(
+nextServer.interceptors.response.use(
   (response) => response,
 
   async (error: AxiosError) => {
@@ -49,7 +48,7 @@ clientApi.interceptors.response.use(
 
     try {
       if (!refreshPromise) {
-        refreshPromise = clientApi
+        refreshPromise = nextServer
           .post("/auth/refresh", undefined, {
             skipAuthRefresh: true,
           })
@@ -61,7 +60,7 @@ clientApi.interceptors.response.use(
 
       await refreshPromise;
 
-      return clientApi(originalRequest);
+      return nextServer(originalRequest);
     } catch (refreshError) {
       if (
         axios.isAxiosError(refreshError) &&

@@ -3,7 +3,7 @@
 import { Button } from '@/app/components/Button/Button';
 import css from './LoginForm.module.css';
 import { Icon } from '@/app/components/Icon/Icon';
-import { LoginData, loginUser, registerUser } from '@/app/lib/api/authApi';
+import { LoginData, loginUser, registerUser } from '@/app/lib/api/client/authApi';
 import { Input } from '../../components/Input';
 import { useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,8 +43,11 @@ export const LoginForm = () => {
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      console.log('REGISTER RESPONSE:', data);
-      dispatch(setUser(data.user));
+      console.log('LOGIN RESPONSE:', data);
+      console.log("BEFORE DISPATCH", data);
+      dispatch(setUser(data));
+      console.log("AFTER DISPATCH", data);
+console.log(data);
       reset();
       router.push('/medicine');
     },

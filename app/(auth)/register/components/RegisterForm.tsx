@@ -3,7 +3,7 @@
 import { Button } from '@/app/components/Button/Button';
 import css from './RegisterForm.module.css';
 import { Icon } from '@/app/components/Icon/Icon';
-import { registerUser } from '@/app/lib/api/authApi';
+import { registerUser } from '@/app/lib/api/client/authApi';
 import { Input } from '@/app/(auth)/components/Input';
 import { useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { setUser } from '@/app/lib/store/slices/authSlice';
-import { RegisterData } from '@/app/lib/api/authApi';
+import { RegisterData } from '@/app/lib/api/client/authApi';
 import clsx from 'clsx';
 
 export const RegisterForm = () => {

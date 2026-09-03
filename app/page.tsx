@@ -1,19 +1,17 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
 import Container from "./components/Container/Container";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
-export default function MainLayout() {
+export default function Home() {
   return (
-    <>
     <Container>
-      <Header/>
+      <Header variant="home" />
+
       <div>MAIN</div>
-      <Footer/>
+
+      <Footer />
     </Container>
-    </>
-  )
-
-
+  );
 }
