@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './components/Providers/Providers';
+import Header from './components/Header/Header';
+import Container from './components/Container/Container';
+import Footer from './components/Footer/Footer';
 
 
 const inter = Inter({
@@ -17,7 +20,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>{children}
+     
+        </Providers>
       </body>
     </html>
   );

@@ -1,0 +1,15 @@
+.navList {
+    display: none;
+    gap: 14px;
+}
+
+.navItem {
+    padding: 8px 17px;
+
+}
+
+@media screen and (min-width: 1440px) {
+    .navList {
+        display: flex;
+    }
+}

@@ -1,0 +1,44 @@
+.link {
+  font-family: "Manrope", sans-serif;
+  padding: 10px;
+  border: solid 1px #fff;
+  border-radius: 30px;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  line-height: 129%;
+  transition: all 250ms ease;
+}
+
+.primary {
+  background-color: var(--color-white);
+  color: var(--color-text-light);
+}
+
+.secondary {
+  background-color: #fff4df;
+  color: #f6b83d;
+}
+
+.primary:hover,
+.primary:active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.secondary:hover,
+.secondary:active {
+  background-color: #fbe7c1;
+}
+
+@media screen and (min-width: 768px) {
+  .link {
+    padding: 14px 35px;
+    line-height: 125%;
+    font-size: 18px;
+  }
+}

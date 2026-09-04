@@ -1,0 +1,54 @@
+import css from "./ModalApproveAction.module.css";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../lib/store/authStore";
+import { useQueryClient } from "@tanstack/react-query";
+import cat from "../../assets/cat.png";
+import { Button } from "../Button/Button";
+import { logoutUser } from "../../lib/api/auth";
+
+type ModalApproveActionProps = {
+  onClose: () => void;
+};
+
+export const ModalApproveAction = ({ onClose }: ModalApproveActionProps) => {
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const logoutMutation = useMutation({
+    mutationFn: logoutUser,
+    onSuccess: () => {
+      queryClient.clear();
+      setUser(null);
+      navigate("/");
+    },
+  });
+
+  return (
+    <div className={css.modalWrapper}>
+      <div className={css.imgWrapper}>
+        <img src={cat} alt="" />
+      </div>
+      <p className={css.paragraph}>Already leaving?</p>
+      <div className={css.buttonsWrapper}>
+        <Button
+          type="button"
+          className={css.confirm}
+          onClick={() => logoutMutation.mutate()}
+          disabled={logoutMutation.isPending}
+        >
+          Yes
+        </Button>
+        <Button
+          type="button"
+          className={css.cancelBtn}
+          onClick={onClose}
+          disabled={logoutMutation.isPending}
+        >
+          Cancel
+        </Button>
+      </div>
+    </div>
+  );
+};
