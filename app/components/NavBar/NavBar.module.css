@@ -1,15 +1,45 @@
 .navList {
-    display: none;
-    gap: 14px;
+  display: none;
+  gap: 14px;
 }
 
 .navItem {
-    padding: 8px 17px;
+  padding: 8px 17px;
+}
 
+.footerNav {
+  display: flex;
+
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.footerButton {
+  background-color: inherit;
+  color: var(--color-white);
+  border: none;
+  padding: 0;
+  font-weight: 600;
+}
+
+.footerButton:hover,
+.footerButton:active {
+  color: var(--color-primary-hover);
+}
+
+@media screen and (min-width: 768px) {
+  .footerNav {
+    margin-bottom: 32px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    .navList {
-        display: flex;
-    }
+  .navList {
+    display: flex;
+    flex-basis: calc((100% - 115px) / 3);
+  }
+
+  .footerNav {
+    gap: 50px;
+  }
 }
