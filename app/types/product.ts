@@ -9,6 +9,6 @@ export interface Product {
     suppliers: string[];
     stock: number;
     price: number;
-    category: Category[];
+    category: string;
 }
 

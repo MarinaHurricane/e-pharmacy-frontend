@@ -15,7 +15,7 @@ export const Medicine = ({ product }: MedicineProps) => {
         {/* <div className={css.imageWrapper}> */}
         <Image
           src={product.photo}
-          alt="product image"
+          alt={`${product.name}-picture`}
           width={350}
           height={320}
           className={css.image}
