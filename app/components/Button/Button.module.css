@@ -3,14 +3,12 @@
   border: solid 1px #fff;
   border-radius: 24px;
   padding: 10px 16px;
-  height: 34px;
   background-color: var(--color-primary);
   color: var(--color-white);
   display: flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-
   transition: all 250ms ease;
 }
 

@@ -1,0 +1,50 @@
+.medicineItem {
+  width: 335px;
+}
+
+.image {
+  border: 1.15px solid rgba(89, 177, 122, 0.6);
+  border-radius: 20px;
+
+  width: 335px;
+  height: 300px;
+  margin-bottom: 8px;
+}
+
+.productInfo {
+  /* display: flex;
+    justify-content: space-between; */
+  border-radius: 20px;
+  padding: 20px;
+  background-color: var(--color-white);
+}
+
+.namePrice {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  color: #1d1e21;
+  margin-bottom: 4px;
+}
+
+.suppliers {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-text-light);
+  margin-bottom: 17px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details {
+  text-decoration: underline;
+  font-size: 12px;
+  line-height: 150%;
+  text-decoration: underline;
+  color: var(--color-text);
+}
