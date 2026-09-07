@@ -8,7 +8,7 @@ export type SelectOption = {
 export const selectStyles: StylesConfig<SelectOption, false> = {
   control: (base) => ({
     ...base,
-    height: window.innerWidth >= 768 ? "48px" : "44px",
+    height: "44px",
     border: "none",
     boxShadow: "none",
     cursor: "pointer",
@@ -23,7 +23,7 @@ export const selectStyles: StylesConfig<SelectOption, false> = {
     color: "#93939a",
     // marginTop: window.innerWidth <= 768 ? "0" : "4px",
     // marginBottom: "5px",
-     transform: "translateY(-2px)",
+     transform: "translateY(-3px)",
   }),
 
   valueContainer: (base) => ({
@@ -35,7 +35,7 @@ export const selectStyles: StylesConfig<SelectOption, false> = {
     marginTop: window.innerWidth <= 768 ? "0" : "4px",
     // marginBottom: "2px",
     color: "#111",
-      transform: "translateY(-2px)",
+      transform: "translateY(-3px)",
   }),
 
   indicatorSeparator: () => ({

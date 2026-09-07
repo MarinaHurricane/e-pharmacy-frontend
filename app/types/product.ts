@@ -1,7 +1,3 @@
-export interface Category {
-    category: string;
-}
-
 export interface Product {
     id: number;
     photo: string;

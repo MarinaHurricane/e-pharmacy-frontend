@@ -1,5 +1,6 @@
 .medicineItem {
   width: 335px;
+  margin: 0 auto;
 }
 
 .image {
@@ -12,8 +13,6 @@
 }
 
 .productInfo {
-  /* display: flex;
-    justify-content: space-between; */
   border-radius: 20px;
   padding: 20px;
   background-color: var(--color-white);
@@ -25,6 +24,9 @@
   line-height: 140%;
   color: #1d1e21;
   margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .suppliers {
@@ -47,4 +49,32 @@
   line-height: 150%;
   text-decoration: underline;
   color: var(--color-text);
+}
+
+@media screen and (min-width: 768px) {
+  .medicineItem {
+    width: 226px;
+  }
+
+  .image {
+    width: 226px;
+    height: 260px;
+  }
+
+  button.cartButton {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .medicineItem {
+    width: 280px;
+  }
+
+  .image {
+    width: 280px;
+    height: 280px;
+  }
 }
