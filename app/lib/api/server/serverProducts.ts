@@ -1,7 +1,7 @@
-import { cookies } from "next/headers";
-import { nextServer } from "../api";
-import { getProductsProps, getProductsResponse } from "../client/products";
-import { serverApi } from "./serverApi";
+import { cookies } from 'next/headers';
+import { nextServer } from '../api';
+import { getProductsProps, getProductsResponse } from '../client/products';
+import { serverApi } from './serverApi';
 
 export const getServerProducts = async ({
   page,
@@ -9,7 +9,7 @@ export const getServerProducts = async ({
   search,
   category,
 }: getProductsProps) => {
-     const cookieStore = await cookies();
+  const cookieStore = await cookies();
   const { data } = await serverApi.get<getProductsResponse>('/products', {
     params: {
       page,
@@ -17,7 +17,7 @@ export const getServerProducts = async ({
       search,
       category,
     },
-        headers: {
+    headers: {
       Cookie: cookieStore.toString(),
     },
   });
@@ -25,11 +25,25 @@ export const getServerProducts = async ({
 };
 
 export const getServerCategories = async () => {
-     const cookieStore = await cookies();
+  const cookieStore = await cookies();
   const { data } = await serverApi.get('/products/categories', {
-        headers: {
+    headers: {
       Cookie: cookieStore.toString(),
     },
   });
+  return data;
+};
+
+export const getServerProductById = async (productId) => {
+  const cookieStore = await cookies();
+  const { data } = await serverApi.get(`/products/${productId}`, {
+    //    params: {
+    //   productId,
+    // },
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  console.log(data);
   return data;
 };

@@ -236,4 +236,25 @@
 <path fill="#f7f8fa" style="fill: var(--color1, #f7f8fa)" d="M11.088 0.112c0.336 0 0.672 0 1.344 0v5.040c-0.336 0-1.008 0-1.68 0s-1.344 0-1.68 0.336c-0.336 0.336-0.336 0.672-0.336 1.456 0 0.672 0 1.12 0 1.792h3.696v4.256h-3.696v18.48h-5.712v-18.592h-3.024v-4.256h3.024v-1.456c0-2.464 0.336-4.256 1.008-5.040 1.008-1.456 3.024-2.128 6.048-2.128 0.336 0.112 0.672 0.112 1.008 0.112z"></path>
 </symbol>
 
+<!-- <symbol id="icon-plus" viewBox="0 0 20 20">
+  <path
+    d="M9.1 4.167a.9.9 0 0 1 1.8 0V9.1h4.931a.9.9 0 0 1 0 1.8H10.9v4.934a.9.9 0 0 1-1.8 0V10.9H4.164a.9.9 0 0 1 0-1.8H9.1V4.167Z"
+    fill="currentColor"
+  />
+</symbol> -->
+
+<symbol id="icon-plus" viewBox="0 0 32 32">
+  <path
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    stroke-miterlimit="4"
+    stroke-width="2.88"
+    d="M16 6.667v18.666M6.667 16h18.666"
+  ></path>
+</symbol>
+
+<symbol id="icon-minus" viewBox="0 0 32 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" d="M6.662 16h18.667"></path>
+</symbol>
+
 </svg>

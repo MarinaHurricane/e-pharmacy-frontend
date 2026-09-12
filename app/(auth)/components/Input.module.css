@@ -52,12 +52,12 @@
 }
 
 @media screen and (min-width: 768px) {
-    .input {
-        width: 280px;
-        padding: 13px 18px;
-    }
+  .input {
+    width: 280px;
+    padding: 13px 18px;
+  }
 
-    /* .inputWrapper {
+  /* .inputWrapper {
         width: 280px;
         height: 44px;
     }

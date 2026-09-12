@@ -13,7 +13,8 @@ import Select, { SingleValue } from 'react-select';
 import { selectStyles } from '@/app/lib/services/reactSelectStyles';
 import { Icon } from '@/app/components/Icon/Icon';
 import { getCategories } from '@/app/lib/api/client/products';
-import clsx from 'clsx';
+import { Loader } from '@/app/components/Loader/Loader';
+import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
 
 type SelectOption = {
   value: string;
@@ -24,20 +25,16 @@ export default function MedicinePage() {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<string | null>(null);
   const [search, setSearch] = useState('');
-  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedQuery(search);
+      setDebouncedSearch(search);
       setPage(1);
     }, 400);
 
     return () => clearTimeout(timer);
   }, [search]);
-
-
-
-  console.log(search);
 
   const { data: categories } = useQuery({
     queryKey: ['categories'],
@@ -49,24 +46,21 @@ export default function MedicinePage() {
     label: category,
   }));
 
-  console.log('CATEGORIES:', categories);
-
-  const { data: productsData } = useQuery({
-    queryKey: ['products', search, page, category],
-    queryFn: () => getProducts({ search, page, category }),
+  const {
+    data: productsData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['products', debouncedSearch, page, category],
+    queryFn: () => getProducts({ search: debouncedSearch, page, category }),
     placeholderData: keepPreviousData,
   });
 
-  const products = productsData?.products;
+  const products = productsData?.products ?? [];
 
-  if (!products) return;
+  const totalPages = productsData?.totalPages ?? 0;
 
-  const totalPages = productsData.totalPages;
-
-  console.log(totalPages);
-
-  const handleReset = (e) => {
-    e.preventDefault();
+  const handleReset = () => {
     setSearch('');
     setCategory(null);
 
@@ -78,59 +72,71 @@ export default function MedicinePage() {
     setPage(1);
   };
 
-  console.log(products);
   return (
     <section className={css.medicinePage}>
       <Title>Medicine</Title>
 
       <div className={css.formWrapper}>
-      <form id="filter-form" className={css.inputs}>
-        
-        <Select<SelectOption>
-          options={categoryOptions}
-          id="category"
-          value={
-            categoryOptions.find(
-              (option: SelectOption) => option?.value === category,
-            ) ?? null
-          }
-          placeholder="Product category"
-          className={css.select}
-          styles={selectStyles}
-          onChange={(option: SingleValue<SelectOption>) =>
-            setCategory(option?.value || null)
-          }
-        />
-        <div className={css.inputWrap}>
-          <Input
-            label="search"
-            id="search"
-            className={css.input }
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+        <form id="filter-form" className={css.inputs}>
+          <Select<SelectOption>
+            options={categoryOptions}
+            id="category"
+            value={
+              categoryOptions.find(
+                (option: SelectOption) => option?.value === category,
+              ) ?? null
+            }
+            placeholder="Product category"
+            className={css.select}
+            styles={selectStyles}
+            onChange={(option: SingleValue<SelectOption>) =>
+              setCategory(option?.value || null)
+            }
           />
-          <div className={css.buttons}>
-            {search && (
-              <button
-                type="button"
-                className={css.clearButton}
-                onClick={handleClear}
-              >
-                <Icon name="icon-x" className={css.icon} />
-              </button>
-            )}
-            <div className={css.clearButton}>
-              <Icon name="icon-search" className={css.icon} />
+          <div className={css.inputWrap}>
+            <Input
+              label="search"
+              id="search"
+              className={css.input}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className={css.buttons}>
+              {search && (
+                <button
+                  type="button"
+                  className={css.clearButton}
+                  onClick={handleClear}
+                >
+                  <Icon name="icon-x" className={css.icon} />
+                </button>
+              )}
+              <div className={css.clearButton}>
+                <Icon name="icon-search" className={css.icon} />
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-      <Button className={css.resetButton} onClick={handleReset} form="filter-form">
-        Reset Filters
-      </Button>
+        </form>
+        <Button
+          type="button"
+          className={css.resetButton}
+          onClick={handleReset}
+          form="filter-form"
+        >
+          Reset Filters
+        </Button>
       </div>
 
-      <MedicineList products={products} />
+      <div className={css.productsWrapper}>
+        {isLoading ? (
+          <Loader />
+        ) : isError ? (
+          <ErrorMessage />
+        ) : (
+          <MedicineList products={products} />
+        )}
+      </div>
+
       <Pagination
         currentPage={page}
         totalPages={totalPages}

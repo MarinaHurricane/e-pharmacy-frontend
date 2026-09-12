@@ -13,8 +13,7 @@
 }
 
 
-.button:hover,
-.button:active {
+.button:hover {
   background-color: var(--color-primary-hover);
 }
 

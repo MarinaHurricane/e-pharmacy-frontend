@@ -3,13 +3,21 @@
   margin: 0 auto;
 }
 
-.image {
-  border: 1.15px solid rgba(89, 177, 122, 0.6);
-  border-radius: 20px;
-
+.imageWrapper {
   width: 335px;
   height: 300px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1.15px solid rgba(89, 177, 122, 0.6);
   margin-bottom: 8px;
+}
+
+.image {
+  border-radius: 20px;
+  width: 335px;
+  height: 300px;
+  object-fit: cover;
+  transform: scale(1.3);
 }
 
 .productInfo {
@@ -56,6 +64,11 @@
     width: 226px;
   }
 
+  .imageWrapper {
+    width: 226px;
+    height: 260px;
+  }
+
   .image {
     width: 226px;
     height: 260px;
@@ -71,6 +84,11 @@
 @media screen and (min-width: 1440px) {
   .medicineItem {
     width: 280px;
+  }
+
+  .imageWrapper {
+    width: 280px;
+    height: 280px;
   }
 
   .image {
