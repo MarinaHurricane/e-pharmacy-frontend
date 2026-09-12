@@ -3,7 +3,7 @@ import css from './Medicine.module.css';
 import Image from 'next/image';
 import { Button } from '@/app/components/Button/Button';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
 
 export const optimizeCloudinaryImage = (url: string) => {
   return url.replace(
@@ -17,7 +17,7 @@ interface MedicineProps {
 }
 
 export const Medicine = ({ product }: MedicineProps) => {
-  const router = useRouter();
+
   console.log('PRODUCT ID:', product.id);
   return (
     <li>
@@ -29,12 +29,12 @@ export const Medicine = ({ product }: MedicineProps) => {
             alt={`${product.name}-picture`}
              sizes="(max-width: 768px) 50vw, (max-width: 1440px) 33vw, 25vw"
             width={350}
-            height={320}
+            height={337}
             loading='eager'
             className={css.image}
           />
         </div>
-        {/* <img src={product.photo} alt="" className={css.image}/> */}
+        
         <div className={css.productInfo}>
           <div className={css.info}>
             <p className={css.namePrice}>{product.name}</p>

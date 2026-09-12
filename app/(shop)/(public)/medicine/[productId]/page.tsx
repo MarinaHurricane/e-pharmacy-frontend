@@ -1,4 +1,4 @@
-import { getServerProductById } from "@/app/lib/api/server/serverProducts";
+import { getServerProductById, getServerProductReviews } from "@/app/lib/api/server/serverProducts";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import ProductDetailsPage from "./ProductDetails.client";
 
@@ -13,10 +13,18 @@ console.log(productId);
 
 const queryClient = new QueryClient();
 
-await queryClient.query({
+await Promise.all([
+  queryClient.query({
     queryKey: ['product', productId],
     queryFn: ()=> getServerProductById(Number(productId)),
-});
+}),
+queryClient.query({
+  queryKey: ['review', productId],
+  queryFn: () => getServerProductReviews(Number(productId)),
+})
+
+]) 
+
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

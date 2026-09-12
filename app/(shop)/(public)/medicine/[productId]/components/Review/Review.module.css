@@ -1,0 +1,92 @@
+.reviewItem {
+  padding: 14px 28px;
+  border: 1px solid #f1f1f1;
+  border-radius: 20px;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.userAvatar {
+  border-radius: 50%;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.time {
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-text-light);
+}
+
+.userWrap {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.mobileRating {
+  display: flex;
+  align-items: top;
+  gap: 6px;
+}
+
+.activeStar {
+  fill: #ffc531;
+}
+
+.tabletRating {
+  display: none;
+}
+
+.rating {
+  font-weight: 500;
+  line-height: 129%;
+  color: var(--color-text);
+}
+
+.reviewText {
+  line-height: 129%;
+  color: var(--color-text-light);
+}
+
+@media screen and (min-width: 768px) {
+  .userName {
+    font-size: 18px;
+  }
+
+  .mobileRating {
+    display: none;
+  }
+
+  .tabletRating {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .activeStar {
+    fill: #ffc531;
+    stroke: #ffc531;
+    color: #ffc531;
+  }
+
+  .inactiveStar {
+    stroke: #f1f1f1;
+    fill: #f1f1f1;
+  }
+
+  .reviewText {
+    font-size: 16px;
+  }
+}

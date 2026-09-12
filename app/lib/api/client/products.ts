@@ -38,7 +38,12 @@ export const getCategories = async () => {
   return data;
 };
 
-export const getProductById = async(productId) => {
+export const getProductById = async(productId: number) => {
   const {data} = await nextServer.get(`/products/${productId}`);
+  return data;
+};
+
+export const getProductReviews = async(productId: number) => {
+  const {data} = await nextServer.get(`/products/${productId}/reviews`);
   return data;
 }
