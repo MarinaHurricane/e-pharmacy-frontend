@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { nextServer } from '../api';
 import { getProductsProps, getProductsResponse } from '../client/products';
 import { serverApi } from './serverApi';
 

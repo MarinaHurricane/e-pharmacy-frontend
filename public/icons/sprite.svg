@@ -236,6 +236,21 @@
 <path fill="#f7f8fa" style="fill: var(--color1, #f7f8fa)" d="M11.088 0.112c0.336 0 0.672 0 1.344 0v5.040c-0.336 0-1.008 0-1.68 0s-1.344 0-1.68 0.336c-0.336 0.336-0.336 0.672-0.336 1.456 0 0.672 0 1.12 0 1.792h3.696v4.256h-3.696v18.48h-5.712v-18.592h-3.024v-4.256h3.024v-1.456c0-2.464 0.336-4.256 1.008-5.040 1.008-1.456 3.024-2.128 6.048-2.128 0.336 0.112 0.672 0.112 1.008 0.112z"></path>
 </symbol>
 
+<symbol id="icon-arrow-right" viewBox="0 0 32 32">
+  <path
+    d="M6.667 16h18.666M18.667 9.333 25.333 16l-6.666 6.667"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</symbol>
+
+<symbol id="icon-lightning-1" viewBox="0 0 32 32">
+<path fill="none" stroke="#59b17a" style="stroke: var(--color1, #59b17a)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4" d="M17.333 2.667l-11.875 14.25c-0.465 0.558-0.698 0.837-0.701 1.073-0.003 0.205 0.088 0.4 0.248 0.529 0.183 0.148 0.547 0.148 1.273 0.148h9.723l-1.333 10.667 11.875-14.251c0.465-0.558 0.698-0.837 0.701-1.073 0.003-0.205-0.088-0.4-0.248-0.529-0.183-0.148-0.547-0.148-1.273-0.148h-9.723l1.333-10.667z"></path>
+</symbol>
+
 
 
 <!-- <symbol id="icon-plus" viewBox="0 0 20 20">
@@ -261,6 +276,26 @@
 
 <symbol id="icon-minus" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.88" d="M6.662 16h18.667"></path>
+</symbol>
+
+<symbol id="icon-map-pin" viewBox="0 0 32 32">
+<path fill="none" stroke="#59b17a" style="stroke: var(--color1, #59b17a)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M28 13.333c0 9.333-12 17.333-12 17.333s-12-8-12-17.333c0-3.183 1.264-6.235 3.515-8.485s5.303-3.515 8.485-3.515c3.183 0 6.235 1.264 8.485 3.515s3.515 5.303 3.515 8.485z"></path>
+<path fill="none" stroke="#59b17a" style="stroke: var(--color1, #59b17a)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 17.333c2.209 0 4-1.791 4-4s-1.791-4-4-4c-2.209 0-4 1.791-4 4s1.791 4 4 4z"></path>
+</symbol>
+
+<symbol id="icon-phone" viewBox="0 0 32 32">
+<path fill="none" stroke="#59b17a" style="stroke: var(--color1, #59b17a)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M29.33 22.56v4c0.002 0.371-0.075 0.739-0.223 1.079s-0.367 0.646-0.641 0.897c-0.274 0.251-0.597 0.442-0.948 0.561s-0.725 0.163-1.094 0.13c-4.103-0.446-8.044-1.848-11.507-4.093-3.222-2.047-5.953-4.779-8-8-2.253-3.478-3.656-7.439-4.093-11.56-0.033-0.369 0.010-0.74 0.129-1.091s0.308-0.673 0.558-0.947c0.25-0.273 0.553-0.492 0.892-0.641s0.705-0.227 1.075-0.227h4c0.647-0.006 1.274 0.223 1.765 0.645s0.811 1.008 0.902 1.649c0.169 1.28 0.482 2.537 0.933 3.747 0.179 0.477 0.218 0.996 0.112 1.495s-0.353 0.956-0.712 1.319l-1.693 1.693c1.898 3.338 4.662 6.102 8 8l1.693-1.693c0.363-0.359 0.82-0.605 1.319-0.712s1.017-0.067 1.494 0.112c1.21 0.451 2.467 0.764 3.747 0.933 0.648 0.091 1.239 0.418 1.662 0.917s0.647 1.136 0.631 1.79z"></path>
+</symbol>
+
+<symbol id="icon-lightning" viewBox="0 0 32 32">
+  <path
+    d="M17.333 2.667l-11.875 14.25c-0.465 0.558-0.698 0.837-0.701 1.073-0.003 0.205 0.088 0.4 0.248 0.529 0.183 0.148 0.547 0.148 1.273 0.148h9.723l-1.333 10.667 11.875-14.251c0.465-0.558 0.698-0.837 0.701-1.073 0.003-0.205-0.088-0.4-0.248-0.529-0.183-0.148-0.547-0.148-1.273-0.148h-9.723l1.333-10.667z"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
 </symbol>
 
 </svg>

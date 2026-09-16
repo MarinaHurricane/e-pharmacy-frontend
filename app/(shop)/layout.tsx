@@ -8,17 +8,8 @@ export default function ShopLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <Container>
-    //   <Header variant="shop" />
-
-    //   <main>
-    //     {children}
-    //   </main>
-
-    //   <Footer />
-    // </Container>
     <>
-      <Header variant="home" />
+      <Header variant="shop" />
 
       <main>
         <section>

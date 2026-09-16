@@ -1,0 +1,118 @@
+.homeImg {
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.mainTitle {
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 100%;
+  max-width: 293px;
+  text-align: left;
+  position: absolute;
+  top: 0px;
+  color: var(--color-white);
+  z-index: 1;
+}
+
+.mainText {
+  position: absolute;
+  bottom: 91px;
+  right: 0;
+  max-width: 156px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 133%;
+  color: var(--color-white);
+  text-shadow: 0 4px 85px 0 rgba(29, 30, 33, 0.3);
+}
+
+.button {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 15px 35px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 18px;
+}
+
+.button:hover,
+.button:active {
+  background-color: rgb(255, 255, 255, 50%);
+  color: var(--color-primary);
+}
+
+.imageBox {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 146px auto 44px auto;
+  width: fit-content;
+
+  
+}
+
+.hero {
+  background-color: var(--color-primary);
+  padding-bottom: 242px;
+  margin-bottom: 40px;
+}
+
+
+@media screen and (min-width:768px) {
+.imageBox {
+  margin-top: 158px;
+}
+
+.mainTitle {
+font-size: 74px;
+max-width: 609px;
+top: 140px;
+
+}
+
+.mainText {
+  bottom: 156px;
+  max-width: 207px;
+  font-size: 16px;
+line-height: 125%;
+}
+
+.hero {
+  padding-bottom: 258px;
+}
+}
+
+@media screen and (min-width: 1440px) {
+  .imageBox {
+    margin-top: 146px;
+    margin-bottom: 64px;
+    width: fit-content;
+  }
+
+  .mainTitle {
+    top: 140px;
+    left: 0px;
+   letter-spacing: 8px;
+   font-size: 76px;
+  }
+
+  .mainText {
+    bottom: 156px;
+    right: 105px;
+    max-width: 207px;
+  }
+
+  .button {
+    padding: 20px 60px;
+    font-size: 22px;
+  }
+
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+
+
+}

@@ -9,6 +9,8 @@ import { RootState } from '@/app/lib/store/store';
 import { NavBar } from '../NavBar/NavBar';
 import { AuthNav } from '../AuthNav/AuthNav';
 import Container from '../Container/Container';
+import clsx from 'clsx';
+import Link from 'next/link';
 
 interface HeaderProps {
   variant: 'home' | 'shop';
@@ -21,34 +23,58 @@ export default function Header({ variant }: HeaderProps) {
   const initial = user?.name.slice(0, 1).toUpperCase();
   console.log(initial);
   return (
-    <section >
+    <section>
       <Container>
-        <div className={css.header}>
-      <Image src="/images/logo2.svg" alt="E-Pharmacy" width={135} height={32} className={css.logo}/>
+        <div className={clsx(variant === 'home' ? css.home : css.header)}>
+        <Link href={'/'} >
+          {variant === 'home' ? (
+            <Image
+              src="/images/logo1.svg"
+              alt="E-Pharmacy"
+              width={135}
+              height={32}
+              className={css.logo}
+            />
+          ) : (
+            <Image
+              src="/images/logo2.svg"
+              alt="E-Pharmacy"
+              width={135}
+              height={32}
+              className={css.logo}
+            />
+          )}
 
-      <NavBar />
+         </Link> 
+         
 
-      <div className={css.cartWrapper}>
-        <div className={css.iconWrapper}>
-          <Icon
-            name="icon-cart"
-            width={16}
-            height={16}
-            className={css.iconCart}
-          />
-        </div>
+          <NavBar />
 
-        {user && (
-          <div className={css.initialWrapper}>
-            <p className={css.initial}>{initial}</p>
+          <div className={css.cartWrapper}>
+            <div className={clsx(css.iconWrapper, variant === 'home' && css.homeIconWrapper) }>
+              <Icon
+                name="icon-cart"
+                width={16}
+                height={16}
+                className={css.iconCart}
+              />
+            </div>
+
+            {user && (
+              <div className={clsx(css.initialWrapper, variant === 'home' && css.homeInitialWrapper) }>
+                <p className={clsx(css.initial, variant === 'home' && css.homeInitial) }>{initial}</p>
+              </div>
+            )}
+
+            <button
+              type="button"
+              className={css.iconWrap}
+              aria-label="Open menu"
+            >
+              <Icon name="icon-menu-01" className={clsx(variant === 'home' ? css.homeMenu : css.menu ) } />
+            </button>
           </div>
-        )}
-
-        <button type="button" className={css.iconWrap} aria-label="Open menu">
-          <Icon name="icon-menu-01" className={css.menu} />
-        </button>
-      </div>
-      </div>
+        </div>
       </Container>
     </section>
   );

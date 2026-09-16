@@ -10,6 +10,7 @@ body {
   background-color: var(--color-background);
     display: flex;
     flex-direction: column;
+    gap: 0;
     min-height: 100vh;
     width: 100%;
     justify-content: space-between;
@@ -55,7 +56,8 @@ a {
 :root {
 
   --color-primary: #59b17a;
-  --color-primary-hover: #3f945f;
+   --color-primary: #4d9a6b;
+  /* --color-primary-hover: #3f945f; */
 
  
   --color-text:  #252539;

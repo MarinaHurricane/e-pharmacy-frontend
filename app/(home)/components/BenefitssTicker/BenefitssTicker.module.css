@@ -1,0 +1,43 @@
+.ticker {
+  width: 100%;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.item {
+  flex-shrink: 0;
+  margin-right: 48px;
+  white-space: nowrap;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.benefit {
+  display: flex;
+  gap: 8px;
+}
+
+.icon {
+  color: var(--color-primary);
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

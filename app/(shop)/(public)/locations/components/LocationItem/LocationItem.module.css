@@ -1,0 +1,9 @@
+.locationItem {
+    position: relative;
+}
+
+.decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
