@@ -26,32 +26,35 @@ export default function Header({ variant }: HeaderProps) {
     <section>
       <Container>
         <div className={clsx(variant === 'home' ? css.home : css.header)}>
-        <Link href={'/'} >
-          {variant === 'home' ? (
-            <Image
-              src="/images/logo1.svg"
-              alt="E-Pharmacy"
-              width={135}
-              height={32}
-              className={css.logo}
-            />
-          ) : (
-            <Image
-              src="/images/logo2.svg"
-              alt="E-Pharmacy"
-              width={135}
-              height={32}
-              className={css.logo}
-            />
-          )}
-
-         </Link> 
-         
+          <Link href={'/'}>
+            {variant === 'home' ? (
+              <Image
+                src="/images/logo1.svg"
+                alt="E-Pharmacy"
+                width={135}
+                height={32}
+                className={css.logo}
+              />
+            ) : (
+              <Image
+                src="/images/logo2.svg"
+                alt="E-Pharmacy"
+                width={135}
+                height={32}
+                className={css.logo}
+              />
+            )}
+          </Link>
 
           <NavBar />
 
           <div className={css.cartWrapper}>
-            <div className={clsx(css.iconWrapper, variant === 'home' && css.homeIconWrapper) }>
+            <div
+              className={clsx(
+                css.iconWrapper,
+                variant === 'home' && css.homeIconWrapper,
+              )}
+            >
               <Icon
                 name="icon-cart"
                 width={16}
@@ -61,8 +64,20 @@ export default function Header({ variant }: HeaderProps) {
             </div>
 
             {user && (
-              <div className={clsx(css.initialWrapper, variant === 'home' && css.homeInitialWrapper) }>
-                <p className={clsx(css.initial, variant === 'home' && css.homeInitial) }>{initial}</p>
+              <div
+                className={clsx(
+                  css.initialWrapper,
+                  variant === 'home' && css.homeInitialWrapper,
+                )}
+              >
+                <p
+                  className={clsx(
+                    css.initial,
+                    variant === 'home' && css.homeInitial,
+                  )}
+                >
+                  {initial}
+                </p>
               </div>
             )}
 
@@ -71,7 +86,10 @@ export default function Header({ variant }: HeaderProps) {
               className={css.iconWrap}
               aria-label="Open menu"
             >
-              <Icon name="icon-menu-01" className={clsx(variant === 'home' ? css.homeMenu : css.menu ) } />
+              <Icon
+                name="icon-menu-01"
+                className={clsx(variant === 'home' ? css.homeMenu : css.menu)}
+              />
             </button>
           </div>
         </div>

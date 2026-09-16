@@ -1,0 +1,11 @@
+.error {
+  color: var(--color-primary);
+  font-size: 25px;
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.reset {
+    margin: 0 auto;
+}

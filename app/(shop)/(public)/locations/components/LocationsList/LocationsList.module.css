@@ -1,0 +1,22 @@
+.locationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .locationsList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 32px;
+     margin-bottom: 120px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+    .locationsList {
+        justify-content: space-between;
+       
+    }
+}

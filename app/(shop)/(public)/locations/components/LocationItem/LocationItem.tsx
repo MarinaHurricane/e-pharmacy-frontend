@@ -3,6 +3,7 @@ import css from './LocationItem.module.css';
 import { Icon } from '@/app/components/Icon/Icon';
 import { isStoreOpen } from '@/app/lib/services/storeOpenHours';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 interface LocationItemProps {
   location: Location;
@@ -15,20 +16,34 @@ export default function LocationItem({ location }: LocationItemProps) {
     <li className={css.locationItem}>
       <div className={css.titleWrapper}>
         <h2 className={css.locationName}>{location.name}</h2>
-        <div className={css.ratingWrapper}>
-          <Icon name="icon-stars" width={16} height={16} />
-          <span className={css.rating}>{location.rating}</span>
+
+        <div className={css.ratingAndHoursWrapper}>
+          <div className={css.ratingWrapper}>
+            <Icon
+              name="icon-stars"
+              width={16}
+              height={16}
+              className={css.star}
+            />
+            <span className={css.rating}>{location.rating}</span>
+          </div>
+
+          <span className={clsx(isStoreOpenNow ? css.isOpen : css.isClosed) }>
+            {isStoreOpenNow ? 'open' : 'closed'}
+          </span>
         </div>
-        <span className={css.isOpen}>{isStoreOpenNow ? 'open' : 'closed'}</span>
-      </div>
-      <div className={css.addressWrapper}>
-        <Icon name="icon-map-pin" width={18} height={18} />
-        <p className={css.address}>{location.address}</p>
       </div>
 
-      <div className={css.addressWrapper}>
-        <Icon name="icon-phone" width={18} height={18} />
-        <p className={css.address}>{location.phone}</p>
+      <div className={css.contacts}>
+        <div className={css.addressWrapper}>
+          <Icon name="icon-map-pin" width={18} height={18} />
+          <p className={css.address}>{location.address}</p>
+        </div>
+
+        <div className={css.addressWrapper}>
+          <Icon name="icon-phone" width={18} height={18} />
+          <p className={css.address}>{location.phone}</p>
+        </div>
       </div>
 
       <Image
