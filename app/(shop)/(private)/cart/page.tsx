@@ -1,104 +1,23 @@
-// 'use client'
-
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-// import css from './page.module.css';
-// import { addCartItem, getCart } from '@/app/lib/api/client/cartApi';
-// import toast from 'react-hot-toast';
-// import axios from 'axios';
-// import { createOrder } from '@/app/lib/api/client/ordersApi';
-
-// export default function CartPage() {
-//     const { data: cart } = useQuery({
-//   queryKey: ['cart'],
-//   queryFn: getCart,
-// });
-
-// console.log(cart);
-
-// // const queryClient = useQueryClient();
-
-// // const addToCartMutation = useMutation({
-// //   mutationFn: addCartItem,
-
-// //   onSuccess: () => {
-// //     queryClient.invalidateQueries({
-// //       queryKey: ['cart'],
-// //     });
-// //   },
-// // });
-
-
-// // const queryClient = useQueryClient();
-
-// // const createOrderMutation = useMutation({
-// //   mutationFn: createOrder,
-
-// //   onSuccess: () => {
-// //     queryClient.invalidateQueries({
-// //       queryKey: ['cart'],
-// //     });
-
-// //     toast.success('Order placed successfully');
-// //   },
-
-// //   onError: (error) => {
-// //     if (axios.isAxiosError(error)) {
-// //       toast.error(
-// //         error.response?.data?.message || 'Failed to place order',
-// //       );
-
-// //       return;
-// //     }
-
-// //     toast.error('Failed to place order');
-// //   },
-// // });
-
-// // createOrderMutation.mutate({
-// //   name,
-// //   email,
-// //   phone,
-// //   address,
-// //   paymentMethod: 'CASH_ON_DELIVERY',
-// // });
-//     return <p>Cart</p>
-// }
-
 'use client';
 
+import css from './page.module.css';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
-import { getCart, updateCartItem, deleteCartItem } from '@/app/lib/api/client/cartApi';
-
+import {
+  getCart,
+  updateCartItem,
+  deleteCartItem,
+} from '@/app/lib/api/client/cartApi';
 import {
   createOrder,
   CreateOrderPayload,
 } from '@/app/lib/api/client/ordersApi';
-
-type Product = {
-  id: number;
-  photo: string;
-  name: string;
-  price: string;
-  discount: number;
-  stock: number;
-};
-
-type CartItem = {
-  id: string;
-  productId: number;
-  quantity: number;
-  product: Product;
-};
-
-type Cart = {
-  id: string;
-  userId: number;
-  items: CartItem[];
-};
+import { Title } from '../../(public)/medicine-store/components/Title/Title';
+import { Button } from '@/app/components/Button/Button';
+import CartItemsList from './CartItemsList/CartItemsList';
+import { Cart, CartItem } from '@/app/types/cart';
 
 type OrderFormValues = {
   name: string;
@@ -111,9 +30,7 @@ type OrderFormValues = {
 export default function CartPage() {
   const queryClient = useQueryClient();
 
-  // -------------------------
-  // GET CART
-  // -------------------------
+  // Getting cart
 
   const {
     data: cart,
@@ -124,9 +41,7 @@ export default function CartPage() {
     queryFn: getCart,
   });
 
-  // -------------------------
-  // UPDATE QUANTITY
-  // -------------------------
+  // Changing quantity of cart items
 
   const updateCartMutation = useMutation({
     mutationFn: ({
@@ -148,9 +63,7 @@ export default function CartPage() {
     },
   });
 
-  // -------------------------
-  // DELETE PRODUCT
-  // -------------------------
+  // Removing product from cart
 
   const deleteCartMutation = useMutation({
     mutationFn: deleteCartItem,
@@ -168,9 +81,11 @@ export default function CartPage() {
     },
   });
 
-  // -------------------------
-  // CHECKOUT FORM
-  // -------------------------
+  const handleDelete = (productId: number) => {
+    deleteCartMutation.mutate(productId);
+  };
+
+  // Checkout form
 
   const {
     register,
@@ -187,13 +102,10 @@ export default function CartPage() {
     },
   });
 
-  // -------------------------
-  // CREATE ORDER
-  // -------------------------
+  // Creating order
 
   const createOrderMutation = useMutation({
-    mutationFn: (values: CreateOrderPayload) =>
-      createOrder(values),
+    mutationFn: (values: CreateOrderPayload) => createOrder(values),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -207,10 +119,7 @@ export default function CartPage() {
 
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(
-          error.response?.data?.message ||
-            'Could not place order',
-        );
+        toast.error(error.response?.data?.message || 'Could not place order');
 
         return;
       }
@@ -219,12 +128,10 @@ export default function CartPage() {
     },
   });
 
-  // -------------------------
-  // QUANTITY HANDLERS
-  // -------------------------
+  // Incrementing/decrementing the quantity of cart item
 
   const handleIncrease = (item: CartItem) => {
-    if (item.quantity >= item.product.stock) {
+    if (item.quantity >= item?.product?.stock) {
       toast.error('No more products available');
       return;
     }
@@ -246,9 +153,7 @@ export default function CartPage() {
     });
   };
 
-  // -------------------------
-  // PLACE ORDER
-  // -------------------------
+  // Placing the order
 
   const onSubmit = (values: OrderFormValues) => {
     if (!cart?.items.length) {
@@ -259,24 +164,14 @@ export default function CartPage() {
     createOrderMutation.mutate(values);
   };
 
-  // -------------------------
-  // TOTAL
-  // -------------------------
+  // Calculating total
 
   const total =
     cart?.items.reduce((sum, item) => {
       const price = Number(item.product.price);
 
-      const finalPrice =
-        price -
-        (price * item.product.discount) / 100;
-
-      return sum + finalPrice * item.quantity;
+      return sum + price * item.quantity;
     }, 0) ?? 0;
-
-  // -------------------------
-  // PAGE STATES
-  // -------------------------
 
   if (isLoading) {
     return <p>Loading cart...</p>;
@@ -286,207 +181,149 @@ export default function CartPage() {
     return <p>Could not load cart.</p>;
   }
 
-  // -------------------------
-  // JSX
-  // -------------------------
-
   return (
-    <main>
-      <h1>Cart</h1>
+    <section className={css.cartPage}>
+      <Title>Cart</Title>
 
-      <section>
-        <h2>Your products</h2>
+      <div className={css.cartPageWrapper}>
+        <div className={css.shipping}>
+          <h2 className={css.subtitle}>Enter Shipping information</h2>
 
-        {!cart?.items.length ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <ul>
-            {cart.items.map((item) => {
-              const price = Number(item.product.price);
+          <p className={css.formText}>Please fill in all the fields below</p>
 
-              const finalPrice =
-                price -
-                (price * item.product.discount) / 100;
+          <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+            <div className={css.inputsWrapper}>
+              <div className={css.formInput}>
+                <label htmlFor="name" className={css.label}>
+                  Name
+                </label>
 
-              return (
-                <li key={item.id}>
-                  <img
-                    src={item.product.photo}
-                    alt={item.product.name}
-                    width={100}
-                    height={100}
+                <input
+                  id="name"
+                  placeholder="Enter name"
+                  className={css.input}
+                  {...register('name', {
+                    required: 'Name is required',
+                  })}
+                />
+
+                {errors.name && <p>{errors.name.message}</p>}
+              </div>
+
+              <div className={css.formInput}>
+                <label htmlFor="email" className={css.label}>
+                  Email
+                </label>
+
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter email"
+                  className={css.input}
+                  {...register('email', {
+                    required: 'Email is required',
+                  })}
+                />
+
+                {errors.email && <p>{errors.email.message}</p>}
+              </div>
+
+              <div className={css.formInput}>
+                <label htmlFor="phone" className={css.label}>
+                  Phone
+                </label>
+
+                <input
+                  id="phone"
+                  type="tel"
+                  placeholder="Enter phone number"
+                  className={css.input}
+                  {...register('phone', {
+                    required: 'Phone is required',
+                  })}
+                />
+
+                {errors.phone && <p>{errors.phone.message}</p>}
+              </div>
+
+              <div className={css.formInput}>
+                <label htmlFor="address" className={css.label}>
+                  Address
+                </label>
+
+                <input
+                  id="address"
+                  placeholder="Enter address"
+                  className={css.input}
+                  {...register('address', {
+                    required: 'Address is required',
+                  })}
+                />
+
+                {errors.address && <p>{errors.address.message}</p>}
+              </div>
+            </div>
+
+            <div className={css.divider} aria-hidden="true" />
+
+            <fieldset className={css.payment}>
+              <legend className={css.paymentLabel}>Payment method</legend>
+
+              <p className={css.formText}>
+                Please choose one of the available options
+              </p>
+
+              <div className={css.paymentOptions}>
+                <label className={css.paymentType}>
+                  <input
+                    type="radio"
+                    value="CASH_ON_DELIVERY"
+                    className={css.radio}
+                    {...register('paymentMethod')}
                   />
+                  Cash on delivery
+                </label>
 
-                  <h3>{item.product.name}</h3>
+                <label className={css.paymentType}>
+                  <input type="radio" disabled className={css.radio} />
+                  Bank payment
+                </label>
+              </div>
+            </fieldset>
 
-                  <p>
-                    £{finalPrice.toFixed(2)}
-                  </p>
+            <div className={css.divider} aria-hidden="true" />
 
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleDecrease(item)
-                      }
-                      disabled={
-                        item.quantity <= 1 ||
-                        updateCartMutation.isPending
-                      }
-                    >
-                      −
-                    </button>
+            <h2 className={css.paymentLabel}>Order details</h2>
 
-                    <span>{item.quantity}</span>
+            <p className={css.totalText}>
+              Shipping and additionnal costs are calculated based on values you
+              have entered.
+            </p>
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleIncrease(item)
-                      }
-                      disabled={
-                        item.quantity >=
-                          item.product.stock ||
-                        updateCartMutation.isPending
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
+            <div className={css.total}>
+              <span className={css.sum}>Total</span>
+              <span className={css.sum}>£ {total.toFixed(2)}</span>
+            </div>
 
-                  <p>
-                    Subtotal: £
-                    {(
-                      finalPrice * item.quantity
-                    ).toFixed(2)}
-                  </p>
+            <Button
+              type="submit"
+              className={css.button}
+              disabled={!cart?.items.length || createOrderMutation.isPending}
+            >
+              {createOrderMutation.isPending
+                ? 'Placing order...'
+                : 'Place order'}
+            </Button>
+          </form>
+        </div>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      deleteCartMutation.mutate(
-                        item.productId,
-                      )
-                    }
-                    disabled={
-                      deleteCartMutation.isPending
-                    }
-                  >
-                    Remove
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-
-        <h2>Total: £{total.toFixed(2)}</h2>
-      </section>
-
-      <section>
-        <h2>Shipping information</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label htmlFor="name">Name</label>
-
-            <input
-              id="name"
-              {...register('name', {
-                required: 'Name is required',
-              })}
-            />
-
-            {errors.name && (
-              <p>{errors.name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="email">Email</label>
-
-            <input
-              id="email"
-              type="email"
-              {...register('email', {
-                required: 'Email is required',
-              })}
-            />
-
-            {errors.email && (
-              <p>{errors.email.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="phone">Phone</label>
-
-            <input
-              id="phone"
-              type="tel"
-              {...register('phone', {
-                required: 'Phone is required',
-              })}
-            />
-
-            {errors.phone && (
-              <p>{errors.phone.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="address">
-              Address
-            </label>
-
-            <input
-              id="address"
-              {...register('address', {
-                required: 'Address is required',
-              })}
-            />
-
-            {errors.address && (
-              <p>{errors.address.message}</p>
-            )}
-          </div>
-
-          <fieldset>
-            <legend>Payment method</legend>
-
-            <label>
-              <input
-                type="radio"
-                value="CASH_ON_DELIVERY"
-                {...register('paymentMethod')}
-              />
-
-              Cash on delivery
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                disabled
-              />
-
-              Bank payment
-            </label>
-          </fieldset>
-
-          <button
-            type="submit"
-            disabled={
-              !cart?.items.length ||
-              createOrderMutation.isPending
-            }
-          >
-            {createOrderMutation.isPending
-              ? 'Placing order...'
-              : 'Place order'}
-          </button>
-        </form>
-      </section>
-    </main>
+        <CartItemsList
+          cartItems={cart?.items ?? []}
+          onIncrease={handleIncrease}
+          onDecrease={handleDecrease}
+          onDelete={handleDelete}
+        />
+      </div>
+    </section>
   );
 }
