@@ -48,7 +48,10 @@ export default function Header({ variant }: HeaderProps) {
 
           <NavBar />
 
+
+
           <div className={css.cartWrapper}>
+            <Link href={'/cart'}>
             <div
               className={clsx(
                 css.iconWrapper,
@@ -62,6 +65,7 @@ export default function Header({ variant }: HeaderProps) {
                 className={css.iconCart}
               />
             </div>
+            </Link>
 
             {user && (
               <div

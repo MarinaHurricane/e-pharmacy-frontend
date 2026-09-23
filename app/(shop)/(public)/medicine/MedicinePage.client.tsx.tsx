@@ -1,6 +1,11 @@
 'use client';
 
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import css from './MedicinePage.module.css';
 import { getProducts } from '@/app/lib/api/client/products';
 import { useEffect, useState } from 'react';
@@ -15,6 +20,8 @@ import { Icon } from '@/app/components/Icon/Icon';
 import { getCategories } from '@/app/lib/api/client/products';
 import { Loader } from '@/app/components/Loader/Loader';
 import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
+import { addCartItem } from '@/app/lib/api/client/cartApi';
+import toast from 'react-hot-toast';
 
 type SelectOption = {
   value: string;
@@ -70,6 +77,28 @@ export default function MedicinePage() {
   const handleClear = () => {
     setSearch('');
     setPage(1);
+  };
+
+  const queryClient = useQueryClient();
+
+  const addToCartMutation = useMutation({
+    mutationFn: (productId: number) => addCartItem(productId, 1),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['cart'],
+      });
+
+      toast.success('Product added to cart');
+    },
+
+    onError: () => {
+      toast.error('Could not add product to cart');
+    },
+  });
+
+  const handleAddToCart = (productId: number) => {
+    addToCartMutation.mutate(productId);
   };
 
   return (
@@ -133,7 +162,7 @@ export default function MedicinePage() {
         ) : isError ? (
           <ErrorMessage />
         ) : (
-          <MedicineList products={products} />
+          <MedicineList products={products} onAddToCart={handleAddToCart}/>
         )}
       </div>
 

@@ -1,11 +1,17 @@
 'use client';
 
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import css from './ProductDetailsClient.module.css';
 import {
   getProductById,
   getProductReviews,
 } from '@/app/lib/api/client/products';
+import { addCartItem } from '@/app/lib/api/client/cartApi';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/app/components/Button/Button';
@@ -14,6 +20,7 @@ import clsx from 'clsx';
 import { ReviewsList } from './components/ReviewsList/ReviewList';
 import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
 import { Loader } from '@/app/components/Loader/Loader';
+import toast from 'react-hot-toast';
 
 interface ProductDetailsClientProps {
   productId: string;
@@ -22,7 +29,7 @@ interface ProductDetailsClientProps {
 export default function ProductDetailsPage({
   productId,
 }: ProductDetailsClientProps) {
-  const [amount, setAmount] = useState<number>(1);
+  const [quantity, setQuantity] = useState(1);
   const [mode, setMode] = useState<'description' | 'reviews'>('description');
 
   const {
@@ -46,6 +53,55 @@ export default function ProductDetailsPage({
   console.log(reviews);
 
   console.log(product);
+
+  const queryClient = useQueryClient();
+
+  const addToCartMutation = useMutation({
+    mutationFn: ({
+      productId,
+      quantity,
+    }: {
+      productId: number;
+      quantity: number;
+    }) => addCartItem(productId, quantity),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['cart'],
+      });
+
+      toast.success('Product added to cart');
+
+      setQuantity(1);
+    },
+
+    onError: () => {
+      toast.error('Could not add product to cart');
+    },
+  });
+
+  const handleIncrease = () => {
+    if (quantity >= product.stock) {
+      return;
+    }
+
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    if (quantity <= 1) {
+      return;
+    }
+
+    setQuantity((prev) => prev - 1);
+  };
+
+  const handleAddToCart = () => {
+    addToCartMutation.mutate({
+      productId: product.id,
+      quantity,
+    });
+  };
 
   return (
     <>
@@ -77,7 +133,12 @@ export default function ProductDetailsPage({
 
               <div className={css.addToCartWrapper}>
                 <div className={css.amountWrapper}>
-                  <button type="button" className={css.plusMinus}>
+                  <button
+                    type="button"
+                    className={css.plusMinus}
+                    onClick={handleDecrease}
+                    disabled={quantity === 1}
+                  >
                     <Icon
                       name="icon-minus"
                       className={css.icon}
@@ -85,13 +146,24 @@ export default function ProductDetailsPage({
                       height={20}
                     />
                   </button>
-                  <p className={css.ammount}>{amount}</p>
-                  <button type="button" className={css.plus}>
+                  <p className={css.ammount}>{quantity}</p>
+                  <button
+                    type="button"
+                    className={css.plus}
+                    onClick={handleIncrease}
+                    disabled={quantity >= product.stock}
+                  >
                     +
                   </button>
                 </div>
 
-                <Button className={css.cartButton}>Add to Cart</Button>
+                <Button
+                  className={css.cartButton}
+                  onClick={handleAddToCart}
+                  disabled={addToCartMutation.isPending || product.stock === 0}
+                >
+                  Add to Cart
+                </Button>
               </div>
             </div>
           </div>

@@ -1,4 +1,3 @@
-
 import axios, {
   AxiosError,
   InternalAxiosRequestConfig,
@@ -14,7 +13,7 @@ declare module "axios" {
 }
 
 export const nextServer = axios.create({
-  baseURL: "/api",
+  baseURL: process.env.NEXT_PUBLIC_API,
   withCredentials: true,
 });
 
@@ -66,7 +65,7 @@ nextServer.interceptors.response.use(
         axios.isAxiosError(refreshError) &&
         refreshError.response?.status === 401
       ) {
-        window.location.href = "/";
+        // window.location.href = "/";
       }
 
       return Promise.reject(refreshError);

@@ -14,9 +14,10 @@ export const optimizeCloudinaryImage = (url: string) => {
 
 interface MedicineProps {
   product: Product;
+  onAddToCart: (productId: number) => void;
 }
 
-export const Medicine = ({ product }: MedicineProps) => {
+export const Medicine = ({ product, onAddToCart }: MedicineProps) => {
 
   console.log('PRODUCT ID:', product.id);
   return (
@@ -44,7 +45,7 @@ export const Medicine = ({ product }: MedicineProps) => {
           <p className={css.suppliers}>{product.suppliers}</p>
 
           <div className={css.info}>
-            <Button className={css.cartButton}>Add to cart</Button>
+            <Button className={css.cartButton} onClick={() => onAddToCart(product.id)}>Add to cart</Button>
 
             <Link href={`/medicine/${product.id}`} className={css.details} >
               Details
