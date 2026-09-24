@@ -21,6 +21,11 @@ import { ReviewsList } from './components/ReviewsList/ReviewList';
 import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
 import { Loader } from '@/app/components/Loader/Loader';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/store/store';
+import { Modal } from '@/app/components/Modal/Modal';
+import { LoginModal } from '@/app/components/LoginModal/LoginModal';
+import { AddToCartModal } from '@/app/components/AddToCartModal/AddToCartModal';
 
 interface ProductDetailsClientProps {
   productId: string;
@@ -29,8 +34,11 @@ interface ProductDetailsClientProps {
 export default function ProductDetailsPage({
   productId,
 }: ProductDetailsClientProps) {
+  const user = useSelector((state: RootState) => state.auth.user);
   const [quantity, setQuantity] = useState(1);
   const [mode, setMode] = useState<'description' | 'reviews'>('description');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState(false);
 
   const {
     data: product,
@@ -93,10 +101,15 @@ export default function ProductDetailsPage({
   };
 
   const handleAddToCart = () => {
+    if (!user) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     addToCartMutation.mutate({
       productId: product.id,
       quantity,
     });
+    setIsAddToCartModalOpen(true);
   };
 
   return (
@@ -190,6 +203,18 @@ export default function ProductDetailsPage({
               <ReviewsList reviews={reviews} />
             )}
           </div>
+
+          {isLoginModalOpen && (
+            <Modal onClose={() => setIsLoginModalOpen(false)}>
+              <LoginModal />
+            </Modal>
+          )}
+
+          {isAddToCartModalOpen && (
+            <Modal onClose={() => setIsAddToCartModalOpen(false)}>
+              <AddToCartModal />
+            </Modal>
+          )}
         </section>
       )}
     </>
