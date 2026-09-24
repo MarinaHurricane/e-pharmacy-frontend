@@ -13,7 +13,7 @@ declare module "axios" {
 }
 
 export const nextServer = axios.create({
-  baseURL: 'api',
+  baseURL: '/api',
   withCredentials: true,
 });
 
