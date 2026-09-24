@@ -11,13 +11,20 @@ import { AuthNav } from '../AuthNav/AuthNav';
 import Container from '../Container/Container';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { MobileMenu } from '../MobileMenu/MobileMenu';
+import { useState } from 'react';
 
 interface HeaderProps {
   variant: 'home' | 'shop';
 }
 
 export default function Header({ variant }: HeaderProps) {
-  const user = useSelector((state: RootState) => state.auth.user);
+   const user = useSelector((state: RootState) => state.auth.user);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+
+ 
   // if(!user) return;
   console.log('USER:', user);
   const initial = user?.name.slice(0, 1).toUpperCase();
@@ -89,6 +96,7 @@ export default function Header({ variant }: HeaderProps) {
               type="button"
               className={css.iconWrap}
               aria-label="Open menu"
+              onClick={() => setIsOpen(true)}
             >
               <Icon
                 name="icon-menu-01"
@@ -98,6 +106,8 @@ export default function Header({ variant }: HeaderProps) {
           </div>
         </div>
       </Container>
+
+      {isOpen && <MobileMenu onClose={closeModal}/>}
     </section>
   );
 }

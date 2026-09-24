@@ -18,6 +18,8 @@ import { Title } from '../../(public)/medicine-store/components/Title/Title';
 import { Button } from '@/app/components/Button/Button';
 import CartItemsList from './CartItemsList/CartItemsList';
 import { Cart, CartItem } from '@/app/types/cart';
+import { Suspense } from 'react';
+import { Loader } from '@/app/components/Loader/Loader';
 
 type OrderFormValues = {
   name: string;
@@ -317,12 +319,15 @@ export default function CartPage() {
           </form>
         </div>
 
-        <CartItemsList
-          cartItems={cart?.items ?? []}
-          onIncrease={handleIncrease}
-          onDecrease={handleDecrease}
-          onDelete={handleDelete}
-        />
+        <Suspense fallback={<Loader />}>
+          <CartItemsList
+            cartItems={cart?.items ?? []}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            onDelete={handleDelete}
+          />
+        </Suspense>
+        
       </div>
     </section>
   );
