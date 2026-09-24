@@ -13,18 +13,18 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
+import { LogoutButton } from '../LogoutButton/LogoutButton';
 
 interface HeaderProps {
   variant: 'home' | 'shop';
 }
 
 export default function Header({ variant }: HeaderProps) {
-   const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
 
- 
   // if(!user) return;
   console.log('USER:', user);
   const initial = user?.name.slice(0, 1).toUpperCase();
@@ -55,42 +55,43 @@ export default function Header({ variant }: HeaderProps) {
 
           <NavBar />
 
-
-
           <div className={css.cartWrapper}>
-            <Link href={'/cart'}>
-            <div
-              className={clsx(
-                css.iconWrapper,
-                variant === 'home' && css.homeIconWrapper,
-              )}
-            >
-              <Icon
-                name="icon-cart"
-                width={16}
-                height={16}
-                className={css.iconCart}
-              />
-            </div>
-            </Link>
-
             {user && (
-              <div
-                className={clsx(
-                  css.initialWrapper,
-                  variant === 'home' && css.homeInitialWrapper,
-                )}
-              >
-                <p
+              <div className={css.userCart}>
+                <Link href={'/cart'}>
+                  <div
+                    className={clsx(
+                      css.iconWrapper,
+                      variant === 'home' && css.homeIconWrapper,
+                    )}
+                  >
+                    <Icon
+                      name="icon-cart"
+                      width={16}
+                      height={16}
+                      className={css.iconCart}
+                    />
+                  </div>
+                </Link>
+                <div
                   className={clsx(
-                    css.initial,
-                    variant === 'home' && css.homeInitial,
+                    css.initialWrapper,
+                    variant === 'home' && css.homeInitialWrapper,
                   )}
                 >
-                  {initial}
-                </p>
+                  <p
+                    className={clsx(
+                      css.initial,
+                      variant === 'home' && css.homeInitial,
+                    )}
+                  >
+                    {initial}
+                  </p>
+                </div>
               </div>
             )}
+
+            <AuthNav/>
 
             <button
               type="button"
@@ -107,7 +108,7 @@ export default function Header({ variant }: HeaderProps) {
         </div>
       </Container>
 
-      {isOpen && <MobileMenu onClose={closeModal}/>}
+      {isOpen && <MobileMenu onClose={closeModal} />}
     </section>
   );
 }

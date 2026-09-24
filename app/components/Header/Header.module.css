@@ -57,12 +57,19 @@
 .cartWrapper {
   display: flex;
   gap: 8px;
+ 
 }
 
 .iconWrap {
   margin-left: 2px;
   border: none;
   background-color: inherit;
+}
+
+.userCart {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .menu {
@@ -106,5 +113,11 @@
   .menu {
     width: 34px;
     height: 34px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .iconWrap {
+    display: none;
   }
 }

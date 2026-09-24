@@ -1,4 +1,3 @@
-import { Product } from '@/app/types/product';
 import css from './CartItemsList.module.css';
 import CartItem from '../../CartItem/CartItem';
 import type { CartItem as CartItemType } from '@/app/types/cart';

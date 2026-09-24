@@ -1,47 +1,34 @@
 import css from './AuthNav.module.css';
+import { ButtonLink } from '../ButtonLink/ButtonLink';
+import { LogoutButton } from '../LogoutButton/LogoutButton';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/store/store';
 
 export const AuthNav = () => {
-    return (
-        <nav >
-            <ul className={css.navList}></ul>
-        </nav>
-    )
-}
+  const user = useSelector((state: RootState) => state.auth.user);
+  return (
+    <nav>
+      <ul className={css.navList}>
+        {user ? (
+          <li className={css.logoutBtn}>
+            <LogoutButton />
+          </li>
+        ) : (
+          <>
+            <li>
+              <ButtonLink href={'/login'} className={css.navButton}>
+                Log in
+              </ButtonLink>
+            </li>
 
-// import { useAuthStore } from "../../lib/store/authStore";
-// import css from "./AuthNav.module.css";
-// import { ButtonLink } from "../ButtonLink/ButtonLink";
-// import { LogoutButton } from "../LogoutButton/LogoutButton";
-// import { NavLink } from "react-router-dom";
-
-// export const AuthNav = () => {
-//   const { user } = useAuthStore();
-//   return (
-//     <nav>
-//       <ul className={css.navList}>
-//         <li>
-//           {user ? (
-//             <LogoutButton />
-//           ) : (
-//             <ButtonLink to="/login" className={css.navButton}>
-//               Log in
-//             </ButtonLink>
-//           )}
-//         </li>
-
-//         <li>
-//           {user ? (
-//             <NavLink to="/profile" className={css.userInfo}>
-//               <img src={user.avatar} className={css.avatar} />
-//               <p className={css.userName}>{user.name}</p>
-//             </NavLink>
-//           ) : (
-//             <ButtonLink to="/register" className={css.navButton}>
-//               Registration
-//             </ButtonLink>
-//           )}
-//         </li>
-//       </ul>
-//     </nav>
-//   );
-// };
+            <li>
+              <ButtonLink href={'/register'} className={css.navButton}>
+                Registration
+              </ButtonLink>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
+  );
+};

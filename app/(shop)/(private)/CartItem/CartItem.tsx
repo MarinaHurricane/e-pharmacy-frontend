@@ -1,13 +1,8 @@
-import { Product } from '@/app/types/product';
 import css from './CartItem.module.css';
 import type { CartItem as CartItemType } from '@/app/types/cart';
 import { Button } from '@/app/components/Button/Button';
 import Image from 'next/image';
-import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addCartItem } from '@/app/lib/api/client/cartApi';
-import toast from 'react-hot-toast';
-import { Icon } from '@/app/components/Icon/Icon';
+
 
 interface CartProps {
   cartItem: CartItemType;
@@ -22,53 +17,9 @@ export default function CartItem({
   onDecrease,
   onDelete,
 }: CartProps) {
-
   const price = Number(cartItem.product.price);
 
   const itemTotal = price * cartItem.quantity;
-
-//   const queryClient = useQueryClient();
-
-//   const addToCartMutation = useMutation({
-//     mutationFn: ({
-//       productId,
-//       quantity,
-//     }: {
-//       productId: number;
-//       quantity: number;
-//     }) => addCartItem(productId, quantity),
-
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({
-//         queryKey: ['cart'],
-//       });
-
-//       toast.success('Product added to cart');
-
-//       setQuantity(1);
-//     },
-
-//     onError: () => {
-//       toast.error('Could not add product to cart');
-//     },
-//   });
-
-  //   const handleIncrease = () => {
-  //     if (quantity >= cartItem.product.stock) {
-  //       return;
-  //     }
-
-  //     setQuantity((prev) => prev + 1);
-  //   };
-
-  //   const handleDecrease = () => {
-  //     if (quantity <= 1) {
-  //       return;
-  //     }
-
-  //     setQuantity((prev) => prev - 1);
-  //   };
-
 
   return (
     <li className={css.itemWrapper}>

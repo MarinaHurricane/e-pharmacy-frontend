@@ -40,12 +40,12 @@ export const MobileMenu = ({
             </li>
             <li>
               <ButtonLink href={'/medicine-store'} onClick={onClose}>
-                Medicine store
+                Find a store
               </ButtonLink>
             </li>
             <li>
               <ButtonLink href={'/medicine'} onClick={onClose}>
-                Medicine
+               Products
               </ButtonLink>
             </li>
           </ul>
