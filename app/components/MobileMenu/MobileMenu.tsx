@@ -39,7 +39,7 @@ export const MobileMenu = ({
               </ButtonLink>
             </li>
             <li>
-              <ButtonLink href={'/location'} onClick={onClose}>
+              <ButtonLink href={'/locations'} onClick={onClose}>
                 Find a store
               </ButtonLink>
             </li>
