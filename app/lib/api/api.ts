@@ -13,7 +13,7 @@ declare module "axios" {
 }
 
 export const nextServer = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API,
+  baseURL: process.env.API_URL,
   withCredentials: true,
 });
 
