@@ -31,7 +31,7 @@ export const NavBar = ({ variant }: NavBarProps) => {
             href="/medicine"
             className={clsx(variant === 'footer' ? css.footerButton : '')}
           >
-            Medicine
+            Products
           </ButtonLink>
         </li>
       </ul>
