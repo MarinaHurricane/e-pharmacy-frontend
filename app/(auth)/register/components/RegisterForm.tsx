@@ -44,11 +44,11 @@ export const RegisterForm = () => {
   const registerMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      dispatch(setUser(data.user));
+      dispatch(setUser(data));
       reset();
       router.push('/medicine');
     },
-    onError: (error) => {
+    onError: () => {
       alert('Registration failed, please try again');
     },
   });
