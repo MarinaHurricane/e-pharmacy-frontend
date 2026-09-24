@@ -25,7 +25,9 @@ export const loginUser = async (data: LoginData) => {
 };
 
 export const logoutUser = async () => {
-  const response = await nextServer.post('/auth/logout');
+  const response = await nextServer.post('/auth/logout', undefined, {
+    skipAuthRefresh: true,
+  });
 
   return response.data;
 };
