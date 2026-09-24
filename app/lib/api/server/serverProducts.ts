@@ -33,7 +33,7 @@ export const getServerCategories = async () => {
   return data;
 };
 
-export const getServerProductById = async (productId) => {
+export const getServerProductById = async (productId: number) => {
   const cookieStore = await cookies();
   const { data } = await serverApi.get(`/products/${productId}`, {
     headers: {
@@ -43,7 +43,7 @@ export const getServerProductById = async (productId) => {
   return data;
 };
 
-export const getServerProductReviews = async (productId) => {
+export const getServerProductReviews = async (productId: number) => {
   const cookieStore = await cookies();
   const { data } = await serverApi.get(`/products/${productId}/reviews`, {
     headers: {

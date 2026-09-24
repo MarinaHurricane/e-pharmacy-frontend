@@ -51,7 +51,7 @@ export default function Header({ variant }: HeaderProps) {
             )}
           </Link>
 
-          <NavBar />
+          <NavBar variant='header'/>
 
           <div className={css.cartWrapper}>
             {user && (

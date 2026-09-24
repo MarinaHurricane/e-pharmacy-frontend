@@ -5,4 +5,6 @@ export interface Location {
   city: string;
   phone: string;
   rating: number;
-};
+  openTime: string;
+  closeTime: string;
+}

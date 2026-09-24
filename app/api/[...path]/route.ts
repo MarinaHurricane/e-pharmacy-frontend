@@ -45,17 +45,25 @@ async function proxyRequest(
       },
     });
 
+    const contentType = response.headers['content-type'];
+
     return new NextResponse(
       typeof response.data === "string"
         ? response.data
         : JSON.stringify(response.data),
       {
         status: response.status,
-        headers: {
-          "Content-Type":
-            response.headers["content-type"] ??
-            "application/json",
-        },
+        // headers: {
+        //   "Content-Type":
+        //     response.headers["content-type"] ??
+        //     "application/json",
+        // },
+           headers: {
+      'Content-Type':
+        typeof contentType === 'string'
+          ? contentType
+          : 'application/json',
+    },
       }
     );
   } catch (error) {
