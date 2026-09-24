@@ -14,12 +14,15 @@ import {
   createOrder,
   CreateOrderPayload,
 } from '@/app/lib/api/client/ordersApi';
-import { Title } from '../../(public)/medicine-store/components/Title/Title';
+import { Title } from '@/app/components/Title/Title';
 import { Button } from '@/app/components/Button/Button';
 import CartItemsList from './CartItemsList/CartItemsList';
 import { Cart, CartItem } from '@/app/types/cart';
-import { Suspense } from 'react';
 import { Loader } from '@/app/components/Loader/Loader';
+import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
+import { useState } from 'react';
+import { Modal } from '@/app/components/Modal/Modal';
+import ConfirmModal from '@/app/components/ConfirmModal/ConfirmModal';
 
 type OrderFormValues = {
   name: string;
@@ -30,6 +33,7 @@ type OrderFormValues = {
 };
 
 export default function CartPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
   // Getting cart
@@ -110,13 +114,14 @@ export default function CartPage() {
     mutationFn: (values: CreateOrderPayload) => createOrder(values),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
+    
+      reset();
+      setIsModalOpen(true);
+        queryClient.invalidateQueries({
         queryKey: ['cart'],
       });
 
-      reset();
-
-      toast.success('Order placed successfully');
+      // toast.success('Order placed successfully');
     },
 
     onError: (error) => {
@@ -176,11 +181,11 @@ export default function CartPage() {
     }, 0) ?? 0;
 
   if (isLoading) {
-    return <p>Loading cart...</p>;
+    return <Loader />;
   }
 
   if (isError) {
-    return <p>Could not load cart.</p>;
+    return <ErrorMessage />;
   }
 
   return (
@@ -209,7 +214,9 @@ export default function CartPage() {
                   })}
                 />
 
-                {errors.name && <p>{errors.name.message}</p>}
+                {errors.name && (
+                  <p className={css.error}> {errors.name.message}</p>
+                )}
               </div>
 
               <div className={css.formInput}>
@@ -227,7 +234,9 @@ export default function CartPage() {
                   })}
                 />
 
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && (
+                  <p className={css.error}>{errors.email.message}</p>
+                )}
               </div>
 
               <div className={css.formInput}>
@@ -245,7 +254,9 @@ export default function CartPage() {
                   })}
                 />
 
-                {errors.phone && <p>{errors.phone.message}</p>}
+                {errors.phone && (
+                  <p className={css.error}>{errors.phone.message}</p>
+                )}
               </div>
 
               <div className={css.formInput}>
@@ -262,7 +273,9 @@ export default function CartPage() {
                   })}
                 />
 
-                {errors.address && <p>{errors.address.message}</p>}
+                {errors.address && (
+                  <p className={css.error}>{errors.address.message}</p>
+                )}
               </div>
             </div>
 
@@ -319,16 +332,19 @@ export default function CartPage() {
           </form>
         </div>
 
-        <Suspense fallback={<Loader />}>
-          <CartItemsList
-            cartItems={cart?.items ?? []}
-            onIncrease={handleIncrease}
-            onDecrease={handleDecrease}
-            onDelete={handleDelete}
-          />
-        </Suspense>
-        
+        <CartItemsList
+          cartItems={cart?.items ?? []}
+          onIncrease={handleIncrease}
+          onDecrease={handleDecrease}
+          onDelete={handleDelete}
+        />
       </div>
+
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <ConfirmModal />
+        </Modal>
+      )}
     </section>
   );
 }

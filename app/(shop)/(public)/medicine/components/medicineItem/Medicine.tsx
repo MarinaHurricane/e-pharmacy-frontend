@@ -19,7 +19,6 @@ interface MedicineProps {
 
 export const Medicine = ({ product, onAddToCart }: MedicineProps) => {
 
-  console.log('PRODUCT ID:', product.id);
   return (
     <li>
       <div className={css.medicineItem}>

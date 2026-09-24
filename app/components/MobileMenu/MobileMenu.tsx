@@ -1,23 +1,23 @@
-import css from "./MobileMenu.module.css";
-import { Icon } from "../Icon/Icon";
-import { LogoutButton } from "../LogoutButton/LogoutButton";
-import { ButtonLink } from "../ButtonLink/ButtonLink";
-import { useSelector } from "react-redux";
+import css from './MobileMenu.module.css';
+import { Icon } from '../Icon/Icon';
+import { LogoutButton } from '../LogoutButton/LogoutButton';
+import { ButtonLink } from '../ButtonLink/ButtonLink';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/app/lib/store/store';
 
 type MobileMenuProps = {
-  variant?: "default" | "home";
+  variant?: 'default' | 'home';
   onClose: () => void;
 };
 
 export const MobileMenu = ({
   onClose,
-  variant = "default",
+  variant = 'default',
 }: MobileMenuProps) => {
-     const user = useSelector((state: RootState) => state.auth.user);
-  
+  const user = useSelector((state: RootState) => state.auth.user);
+
   return (
-    <div className={variant === "default" ? css.menu : css.menuHome}>
+    <div className={variant === 'default' ? css.menu : css.menuHome}>
       <div className={css.menuContainer}>
         <button
           type="button"
@@ -27,7 +27,7 @@ export const MobileMenu = ({
         >
           <Icon
             name="icon-cross-small"
-            className={variant === "default" ? css.icon : css.iconHome}
+            className={variant === 'default' ? css.icon : css.iconHome}
           />
         </button>
 
@@ -45,7 +45,7 @@ export const MobileMenu = ({
             </li>
             <li>
               <ButtonLink href={'/medicine'} onClick={onClose}>
-               Products
+                Products
               </ButtonLink>
             </li>
           </ul>

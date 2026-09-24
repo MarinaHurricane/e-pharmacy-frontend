@@ -56,8 +56,8 @@ a {
 :root {
 
   --color-primary: #59b17a;
-   --color-primary: #4d9a6b;
-  /* --color-primary-hover: #3f945f; */
+   /* --color-primary: #4d9a6b; */
+  --color-primary-hover: #3f945f;
 
  
   --color-text:  #252539;

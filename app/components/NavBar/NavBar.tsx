@@ -20,10 +20,10 @@ export const NavBar = ({ variant }: NavBarProps) => {
         </li>
         <li className={css.navItemWrapper}>
           <ButtonLink
-            href="/medicine-store"
+            href="/locations"
             className={clsx(variant === 'footer' ? css.footerButton : '')}
           >
-            Medicine Store
+            Find a Store
           </ButtonLink>
         </li>
         <li className={css.navItemWrapper}>

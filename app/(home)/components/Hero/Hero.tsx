@@ -14,8 +14,9 @@ export default function Hero() {
   return (
     <>
       <section className={css.hero}>
-        <Container>
+     
           <Header variant="home" />
+             <Container>
   
 
    

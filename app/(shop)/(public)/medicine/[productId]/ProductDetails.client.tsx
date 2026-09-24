@@ -50,10 +50,6 @@ export default function ProductDetailsPage({
     queryFn: () => getProductReviews(Number(productId)),
   });
 
-  console.log(reviews);
-
-  console.log(product);
-
   const queryClient = useQueryClient();
 
   const addToCartMutation = useMutation({

@@ -32,12 +32,6 @@
   margin-bottom: 40px;
 }
 
-/* .form {
-  display: flex;
-  flex-direction: column;
-
-} */
-
 .inputsWrapper {
   display: flex;
   flex-direction: column;
@@ -126,6 +120,10 @@ button.button {
 
 .totalText {
   margin-bottom: 20px;
+}
+
+.error {
+  color: var(--color-red-text);
 }
 
 @media screen and (min-width: 768px) {

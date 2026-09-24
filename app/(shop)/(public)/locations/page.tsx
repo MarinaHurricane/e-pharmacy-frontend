@@ -1,6 +1,6 @@
 import css from './page.module.css';
-import { Title } from '../medicine-store/components/Title/Title';
 import LocationsList from './components/LocationsList/LocationsList';
+import { Title } from '@/app/components/Title/Title';
 
 export default function LocationsPage() {
   return (

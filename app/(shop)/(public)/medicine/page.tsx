@@ -4,10 +4,9 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query';
 import MedicinePage from './MedicinePage.client.tsx';
-import {
-  getServerCategories,
-  getServerProducts,
-} from '@/app/lib/api/server/serverProducts.ts';
+import { getServerCategories } from '@/app/lib/api/server/serverProducts';
+
+import { getServerProducts } from '@/app/lib/api/server/serverProducts';
 
 export default async function Page({
   searchParams,

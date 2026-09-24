@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Button/Button';
 import { logoutUser } from '@/app/lib/api/client/authApi';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { clearUser } from '@/app/lib/store/slices/authSlice';
@@ -35,9 +35,6 @@ export const ModalApproveAction = ({ onClose }: ModalApproveActionProps) => {
 
   return (
     <div className={css.modalWrapper}>
-      {/* <div className={css.imgWrapper}>
-        <img src={cat} alt="" />
-      </div> */}
       <p className={css.paragraph}>Already leaving?</p>
       <div className={css.buttonsWrapper}>
         <Button

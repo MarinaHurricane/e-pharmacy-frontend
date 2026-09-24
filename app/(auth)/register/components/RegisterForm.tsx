@@ -44,7 +44,6 @@ export const RegisterForm = () => {
   const registerMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      console.log('REGISTER RESPONSE:', data);
       dispatch(setUser(data.user));
       reset();
       router.push('/medicine');
@@ -55,7 +54,6 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = (data: RegisterData) => {
-    console.log(data);
     registerMutation.mutate(data);
   };
 

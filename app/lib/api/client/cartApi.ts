@@ -2,7 +2,6 @@ import { nextServer } from '../api';
 
 export const getCart = async () => {
   const { data } = await nextServer.get('/cart');
-  console.log(data);
   return data;
 };
 

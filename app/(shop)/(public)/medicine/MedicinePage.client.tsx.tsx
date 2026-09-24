@@ -11,7 +11,7 @@ import { getProducts } from '@/app/lib/api/client/products';
 import { useEffect, useState } from 'react';
 import { MedicineList } from './components/MedicineList/MedicineList';
 import { Pagination } from '@/app/components/Pagination/Pagination';
-import { Title } from '../medicine-store/components/Title/Title';
+import { Title } from '@/app/components/Title/Title';
 import { Input } from '@/app/(auth)/components/Input';
 import { Button } from '@/app/components/Button/Button';
 import Select, { SingleValue } from 'react-select';
@@ -22,6 +22,11 @@ import { Loader } from '@/app/components/Loader/Loader';
 import { ErrorMessage } from '@/app/components/ErrorMessage/ErrorMessage';
 import { addCartItem } from '@/app/lib/api/client/cartApi';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/store/store';
+import { Modal } from '@/app/components/Modal/Modal';
+import { LoginModal } from '@/app/components/LoginModal/LoginModal';
+import { AddToCartModal } from '@/app/components/AddToCartModal/AddToCartModal';
 
 type SelectOption = {
   value: string;
@@ -29,10 +34,14 @@ type SelectOption = {
 };
 
 export default function MedicinePage() {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,7 +52,7 @@ export default function MedicinePage() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data: categories } = useQuery({
+  const { data: categories = [] } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
   });
@@ -98,7 +107,12 @@ export default function MedicinePage() {
   });
 
   const handleAddToCart = (productId: number) => {
+    if (!user) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     addToCartMutation.mutate(productId);
+    setIsAddToCartModalOpen(true);
   };
 
   return (
@@ -162,9 +176,21 @@ export default function MedicinePage() {
         ) : isError ? (
           <ErrorMessage />
         ) : (
-          <MedicineList products={products} onAddToCart={handleAddToCart}/>
+          <MedicineList products={products} onAddToCart={handleAddToCart} />
         )}
       </div>
+
+      {isLoginModalOpen && (
+        <Modal onClose={() => setIsLoginModalOpen(false)}>
+          <LoginModal />
+        </Modal>
+      )}
+
+      {isAddToCartModalOpen && (
+        <Modal onClose={() => setIsAddToCartModalOpen(false)}>
+          <AddToCartModal/>
+        </Modal>
+      )}
 
       <Pagination
         currentPage={page}

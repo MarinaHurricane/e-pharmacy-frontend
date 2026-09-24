@@ -20,8 +20,8 @@
 }
 
 .secondary {
-  background-color: #fff4df;
-  color: #f6b83d;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .primary:hover,
@@ -32,7 +32,7 @@
 
 .secondary:hover,
 .secondary:active {
-  background-color: #fbe7c1;
+  background-color: var(--color-primary-hover);
 }
 
 @media screen and (min-width: 768px) {

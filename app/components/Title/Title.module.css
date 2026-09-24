@@ -5,13 +5,11 @@
   line-height: 100%;
   letter-spacing: -0.03em;
   color: #262626;
-  margin-bottom: 40px;
 }
 
 @media screen and (min-width: 768px) {
   .title {
     font-size: 54px;
     letter-spacing: -0.04em;
-    margin-bottom: 32px;
   }
 }

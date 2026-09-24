@@ -25,10 +25,8 @@ export default function Header({ variant }: HeaderProps) {
 
   const closeModal = () => setIsOpen(false);
 
-  // if(!user) return;
-  console.log('USER:', user);
   const initial = user?.name.slice(0, 1).toUpperCase();
-  console.log(initial);
+
   return (
     <section>
       <Container>
@@ -91,7 +89,7 @@ export default function Header({ variant }: HeaderProps) {
               </div>
             )}
 
-            <AuthNav/>
+            <AuthNav />
 
             <button
               type="button"

@@ -43,11 +43,7 @@ export const LoginForm = () => {
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      console.log('LOGIN RESPONSE:', data);
-      console.log("BEFORE DISPATCH", data);
       dispatch(setUser(data));
-      console.log("AFTER DISPATCH", data);
-console.log(data);
       reset();
       router.push('/medicine');
     },
@@ -57,7 +53,6 @@ console.log(data);
   });
 
   const onSubmit = (data: LoginData) => {
-    console.log(data);
     loginMutation.mutate(data);
   };
 

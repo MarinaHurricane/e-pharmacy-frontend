@@ -1,0 +1,31 @@
+.modalWrapper {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.comment {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.icon {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .modalWrapper {
+    padding: 55px;
+  }
+
+  .button {
+    padding: 14px;
+  }
+}

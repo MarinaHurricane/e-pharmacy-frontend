@@ -36,23 +36,19 @@ export const getServerCategories = async () => {
 export const getServerProductById = async (productId) => {
   const cookieStore = await cookies();
   const { data } = await serverApi.get(`/products/${productId}`, {
-    //    params: {
-    //   productId,
-    // },
     headers: {
       Cookie: cookieStore.toString(),
     },
   });
-  console.log(data);
   return data;
 };
 
-export const getServerProductReviews = async(productId) => {
-   const cookieStore = await cookies();
-  const {data} = await serverApi.get(`/products/${productId}/reviews`, {
-      headers: {
+export const getServerProductReviews = async (productId) => {
+  const cookieStore = await cookies();
+  const { data } = await serverApi.get(`/products/${productId}/reviews`, {
+    headers: {
       Cookie: cookieStore.toString(),
     },
   });
   return data;
-}
+};
